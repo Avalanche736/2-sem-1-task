@@ -1,0 +1,131 @@
+#include <iostream>
+using namespace std;
+
+
+
+class Vector2D
+{
+private:
+    int x;
+    int y;
+public:
+
+    Vector2D(){}
+
+
+    Vector2D(int x, int y)
+    {
+        this->x = x;
+        this->y = y;
+    }
+
+
+    ~Vector2D(){}
+
+
+    int getx()
+    {
+        return x;
+    }
+
+
+    int gety()
+    {
+        return y;
+    }
+
+    void show()
+        {
+                cout<<"("<<this->x<<";"<<this->y<<")"<<endl;
+        }
+
+    //void setx(int i) const
+    //{
+      //  this->x = i;
+    //}
+
+
+    //void sety(int i) const
+    //{
+     //   this->y = i;
+    //}
+
+
+    bool operator == (const Vector2D &rhs)
+    {
+
+            if (this->x != rhs.x or this->y != rhs.y )
+                return false;
+        return true;
+    }
+
+
+    bool operator != (const Vector2D &rhs)
+    {
+            if (this->x != rhs.x or this->y != rhs.y )
+                return true;
+        return false;
+    }
+
+
+    Vector2D operator + (const Vector2D &rhs)
+    {
+        Vector2D* v =  new Vector2D();
+        v->x = this->x + rhs.x;
+        v->y = this->y + rhs.y;
+        return *v;
+    }
+
+
+    Vector2D operator - (const Vector2D &rhs)
+    {
+        Vector2D* v =  new Vector2D();
+        v->x = this->x - rhs.x;
+        v->y = this->y - rhs.y;
+        return *v;
+    }
+
+
+    Vector2D operator * (const Vector2D &rhs)
+    {
+        Vector2D* v =  new Vector2D();
+        v->x = this->x * rhs.x;
+        v->y = this->y * rhs.y;
+        return *v;
+    }
+
+
+    Vector2D operator * (int alpha)
+    {
+        Vector2D* v =  new Vector2D();
+        v->x = this->x * alpha;
+        v->y = this->y * alpha;
+        return *v;
+    }
+
+
+    friend Vector2D operator * (int alpha, const Vector2D &rhs);
+
+};
+
+
+Vector2D operator * (int alpha, const Vector2D &rhs)
+{
+    Vector2D* v =  new Vector2D();
+        v->x = rhs.x * alpha;
+        v->y = rhs.y * alpha;
+        return *v;
+}
+
+
+
+main()
+{
+    Vector2D a(1,2);
+    Vector2D b(1,2);
+
+    Vector2D c = a + b;
+
+    c.show;
+
+}
