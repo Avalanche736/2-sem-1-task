@@ -119,13 +119,13 @@ Vector2D operator * (int alpha, const Vector2D &rhs)
 
 
 
-main()
-{
-    Vector2D a(1,2);
-    Vector2D b(1,2);
+//main()
+//{
+//    Vector2D a(1,2);
+//    Vector2D b(1,2);
 
-    Vector2D c = a + b;
+//    Vector2D c = a + b;
 
-    c.show;
+//    c.show();
 
-}
+//}
