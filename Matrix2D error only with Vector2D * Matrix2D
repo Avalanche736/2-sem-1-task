@@ -3,6 +3,48 @@ using namespace std;
 
 
 
+class Vector2D
+{
+private:
+    int x;
+    int y;
+public:
+
+    Vector2D(){}
+
+
+    Vector2D(int x, int y)
+    {
+        this->x = x;
+        this->y = y;
+    }
+
+    ~Vector2D() {}
+    int getx()
+    {
+        return x;
+    }
+
+
+    int gety()
+    {
+        return y;
+    }
+    void setx(int i)
+    {
+        this->x = i;
+    }
+
+
+    void sety(int i)
+    {
+        this->y = i;
+    }
+};
+
+
+
+
 class Matrix2D
 {
 private:
@@ -27,21 +69,25 @@ public:
     ~Matrix2D(){}
 
 
-    //int getx()
-    //{
-     //   return x;
-    //}
+    int geta()
+    {
+        return a;
+    }
+    int getb()
+    {
+        return b;
+    }
+    int getc()
+    {
+        return c;
+    }
+    int getd()
+    {
+        return d;
+    }
 
 
-    //int gety()
-   /// {
-     //   return y;
-    //}
 
-    //void show()
-       // {
-       //         cout<<"("<<this->x<<";"<<this->y<<")"<<endl;
-       //}
 
     //void setx(int i) const
     //{
@@ -55,6 +101,18 @@ public:
     //}
 
 
+    void show ()
+    {
+        cout << "|" << a << " " << b << "|" << endl;
+        cout << "|" << c << " " << d << "|" << endl;
+    }
+
+
+
+    int det()
+    {
+        return (a*d-b*c);
+    }
 
 
 
@@ -105,6 +163,7 @@ public:
 
 
     friend Matrix2D operator * (int alpha, const Matrix2D &rhs);
+    friend Matrix2D operator * (const Matrix2D &rhs, const Vector2D &v);
 
 };
 
@@ -118,7 +177,22 @@ Matrix2D operator * (int alpha, const Matrix2D &rhs)
         v->d = rhs.d * alpha;
         return *v;
 }
+
+Matrix2D operator * (const Matrix2D &rhs, const Vector2D &v)
+{
+    Vector2D* vec =  new Vector2D();
+    vec->setx(rhs.a * v.getx() + rhs.b * v.gety());
+    vec->sety(rhs.b * v.getx() + rhs.c * v.gety());
+    return *vec;
+}
+
+
 main()
 {
-    cout<<"Hello world!"<< endl;
+    Matrix2D a(1,1,1,1);
+    Matrix2D b(5,1,3,2);
+    Matrix2D d = a * b;
+    d.show();
+
 }
+
