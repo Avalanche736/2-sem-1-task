@@ -1,0 +1,53 @@
+//Паровоз описывается тремя параметрами - масса, текущая скорость, текущая координата (одномерная, отсчитывается вдоль рельсов).
+
+
+#include <iostream>
+using namespace std;
+
+class Train
+{
+public:
+    double m;
+    double v;
+    double x;
+    // Создать паровоз массой m,
+    // стоящий в начале координат
+    Train(double m)
+    {
+        x = 0;
+        v = 0;
+        this->m = m;
+    }
+
+    // Ехать с текущей скоростью в течение времени dt
+    void move(double dt)
+    {
+        x = x + v*dt;
+    }
+
+    // Изменить полный импульс паровоза (p = mv) на dp
+    // Изменение может менять знак скорости
+    void accelerate(double dp)
+    {
+        v = v + dp/m;
+    }
+
+    // Получить текущую координату паровоза
+    double getX()
+    {
+        return this->x;
+    }
+};
+
+int main()
+{
+    Train t(10);
+    t.accelerate(1); // Скорость стала 0.1
+    t.move(1);
+    cout << "Current X: " << t.getX() << endl;
+    t.move(1);
+    cout << "Current X: " << t.getX() << endl;
+    t.accelerate(-2); // Скорость стала -0.1
+    t.move(3);
+    cout << "Current X: " << t.getX() << endl;
+}
